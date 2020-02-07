@@ -7,6 +7,7 @@ Flight::register('db', 'Database', array('baza_biblioteka'));
 Flight::route('/', function(){
 	die("Izabereti neku od ruta...");
 });
+
 //postavljanje metode pristupa,
 //fajl kome se pristupa i 
 //funkciju koja ce se izvrsiti tom prilikom
