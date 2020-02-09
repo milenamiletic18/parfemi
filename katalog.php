@@ -77,7 +77,12 @@
 
                     $(`#${parfem.id}-dodajUKorpu`).click(function () {
                         $.post("./server/dodajUKorpu.php", { parfem: parfem.id }, function (data) {
-                            alert(data);
+                            if(data==="ulogujte se"){
+                                window.location.assign("login.php");
+                            }else{
+                                alert(data);
+                            }
+                               
                         });
                     })
 
