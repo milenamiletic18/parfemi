@@ -3,7 +3,7 @@ class Database {
 	private $hostname = "localhost";
 	private $username = "root";
 	private $password = "";
-	private $dbname = "baza_biblioteka";
+	private $dbname = "perfemi";
 	private $dblink;
 	private $result = true;
 	private $records;
@@ -37,7 +37,10 @@ class Database {
 		}
 		$this->dblink->set_charset("utf8");
 	}
-
+	public function getError()
+	{
+		return $this->mysqli->error;
+	}
 
 	function ExecuteQuery($query)
 	{

@@ -1,3 +1,16 @@
+<?php 
+    include "./server/prebaciNaLogin.php";
+    if($_SESSION["korisnik"]->nazivUloge!="admin"){
+        header("location:index.php");
+    }
+    include "./server/broker.php";
+    $broker=Broker::getBroker();
+    $broker->izvrsi("select k.* from korisnik k inner join uloga u on (k.uloga=u.id) where not u.naziv='admin'");
+    $rez=$broker->getRezultat();
+    if(!$rez){
+        echo $broker->getError();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,126 +56,48 @@
 
         <!-- ---------------------------------------------------------------------------------------------------------- -->
         <div class="row" id="transakcije">
-            <div class="row transakcija">
-                <div class="col-2">
-                    <p>1.</p>
-                </div>
-                <div class="col-3">
-                    <p>20-01-2019</p>
-                </div>
-                <div class="col-4">
-                    <p>milena97@gmail.com</p>
-                </div>
-                <div class="col-3">
-                    <p><b>34570.00 din.</b></p>
-                </div>
-            </div>
-            <div class="row transakcija">
-                <div class="col-2">
-                    <p>1.</p>
-                </div>
-                <div class="col-3">
-                    <p>20-01-2019</p>
-                </div>
-                <div class="col-4">
-                    <p>milena97@gmail.com</p>
-                </div>
-                <div class="col-3">
-                    <p><b>34570.00 din.</b></p>
-                </div>
-            </div>
-            <div class="row transakcija">
-                <div class="col-2">
-                    <p>1.</p>
-                </div>
-                <div class="col-3">
-                    <p>20-01-2019</p>
-                </div>
-                <div class="col-4">
-                    <p>milena97@gmail.com</p>
-                </div>
-                <div class="col-3">
-                    <p><b>34570.00 din.</b></p>
-                </div>
-            </div>
-            <div class="row transakcija">
-                <div class="col-2">
-                    <p>1.</p>
-                </div>
-                <div class="col-3">
-                    <p>20-01-2019</p>
-                </div>
-                <div class="col-4">
-                    <p>milena97@gmail.com</p>
-                </div>
-                <div class="col-3">
-                    <p><b>34570.00 din.</b></p>
-                </div>
-            </div>
+
         </div>
         <!-- ---------------------------------------------------------------------------------------------------------- -->
-        <div class="row" id="korisnici" hidden="true">
-            <div class="row korisnici">
-                <div class="col-2">
-                    <p>1.</p>
-                </div>
-                <div class="col-3">
-                    <p>Milena Miletic</p>
-                </div>
-                <div class="col-4">
-                    <p>061/6202600</p>
-                </div>
-                <div class="col-3">
-                    <p>milena97@gmail.com</p>
-                </div>
-            </div>
-            <div class="row korisnici">
-                <div class="col-2">
-                    <p>1.</p>
-                </div>
-                <div class="col-3">
-                    <p>Milena Miletic</p>
-                </div>
-                <div class="col-4">
-                    <p>061/6202600</p>
-                </div>
-                <div class="col-3">
-                    <p>milena97@gmail.com</p>
-                </div>
-            </div>
-            <div class="row korisnici">
-                <div class="col-2">
-                    <p>1.</p>
-                </div>
-                <div class="col-3">
-                    <p>Milena Miletic</p>
-                </div>
-                <div class="col-4">
-                    <p>061/6202600</p>
-                </div>
-                <div class="col-3">
-                    <p>milena97@gmail.com</p>
-                </div>
-            </div>
-            <div class="row korisnici">
-                <div class="col-2">
-                    <p>1.</p>
-                </div>
-                <div class="col-3">
-                    <p>Milena Miletic</p>
-                </div>
-                <div class="col-4">
-                    <p>061/6202600</p>
-                </div>
-                <div class="col-3">
-                    <p>milena97@gmail.com</p>
-                </div>
-            </div>
+        <div  id="korisnici" hidden="true">
+            <table class="table display" id="korisniciTabela">
+            <thead>
+                <th>ID</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Email</th>
+                <th>Username</th>
+                </thead>
+                <tbody>
+                    <?php
+                        if($rez){
+                            while($row=$rez->fetch_object()){
+                                ?>
+                                <tr id="<?php echo $row->id;?>">
+                                <td><?php echo $row->id;?></td>
+                                    <td><?php echo $row->ime;?></td>
+                                    <td><?php echo $row->prezime;?></td>
+                                    <td><?php echo $row->email;?></td>
+                                    <td><?php echo $row->username;?></td>
+                                </tr>
+                                <?php
+                            }
+                        }
+
+                    ?>
+
+
+                </tbody>
+            </table>
         </div>
         <?php include "footer.php" ?>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="DataTables-1.10.4/media/js/jquery.dataTables.min.js"></script>
+    <script src="./jeditable/jquery.jeditable.js"></script>
         <script>
             $(document).ready(function () {
+                napuniTransakcije();
+                napraviTabelu();
                 $("#prikaziTransakcije").click(function () {
                     $("#transakcije").attr("hidden", false);
                     $("#korisnici").attr("hidden", true);
@@ -172,7 +107,56 @@
                     $("#korisnici").attr("hidden", false);
                 })
             })
-
+            function napuniTransakcije() {
+                $.getJSON("./server/transakcije.php", function (data) {
+                    if (data.greska) {
+                        alert(data.greska);
+                        return;
+                    }
+                    let i = 0;
+                    $("#transakcije").html(`
+                        <div class="row transakcija">
+                <div class="col-2">
+                    <p>Rb.</p>
+                </div>
+                <div class="col-3">
+                    <p>E mail</p>
+                </div>
+                <div class="col-4">
+                    <p>Username</p>
+                </div>
+                <div class="col-3">
+                    <p><b>Suma</b></p>
+                </div>
+            </div>
+                        `);
+                    for (let transakcija of data) {
+                        $("#transakcije").append(`
+                        <div class="row transakcija">
+                <div class="col-2">
+                    <p>${++i}.</p>
+                </div>
+                <div class="col-3">
+                    <p>${transakcija.email}</p>
+                </div>
+                <div class="col-4">
+                    <p>${transakcija.username}</p>
+                </div>
+                <div class="col-3">
+                    <p><b>${transakcija.ukupno}</b></p>
+                </div>
+            </div>
+                        `)
+                    }
+                })
+            }
+            function napraviTabelu() {
+                $("#korisniciTabela").dataTable({
+                    "language": {
+                        "url": "DataTables-1.10.4/i18n/serbian.json"
+                    },
+                })
+            }
         </script>
     </div>
 </body>

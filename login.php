@@ -12,6 +12,7 @@
 </head>
 
 <body class="pozadina">
+    <?php include "header.php"; ?>
     <div class="container">
         <div class="row">
             <div class="col-md-4"></div>
@@ -21,20 +22,66 @@
                     <center>Dobrodosli!</center>
                 </h2>
                 <br>
-                <input type="text" class="form-control" placeholder="username">
+                <input type="text" class="form-control" placeholder="username" id="username">
                 <br>
-                <input type="password" class="form-control" placeholder="sifra">
+                <input type="password" class="form-control" placeholder="sifra" id="sifra">
                 <br>
+                <input type="text" class="form-control" placeholder="Ime" id="ime" hidden="true">
                 <br>
-                <button class="form-control dugme" onclick="location.href='katalog.php'">Login</button>
+                <input type="text" class="form-control" placeholder="Prezime" id="prezime" hidden="true">
+                <br>
+                <input type="text" class="form-control" placeholder="Email" id="email" hidden="true">
+                <br>
 
-                <button class="form-control dugme">Preskoci</button>
+                <br>
+                <button class="form-control dugme" id="Login">Login</button>
+
+                <button class="form-control dugme" id="regForma">Nemas nalog?</button>
+                <button class="form-control dugme" id="register" hidden="true">Register</button>
             </div>
             <div class="col-md-4"></div>
 
         </div>
 
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#regForma").click(function () {
+                $("#ime").attr("hidden", false);
+                $("#prezime").attr("hidden", false);
+                $("#email").attr("hidden", false);
+                $("#register").attr("hidden", false);
+                $("#Login").hide();
+                $("#regForma").hide();
+            });
+            $("#register").click(function () {
+                let ime = $("#ime").val();
+                let prezime = $("#prezime").val();
+                let email = $("#email").val();
+                let username = $("#username").val();
+                let sifra = $("#sifra").val();
+                $.post("./server/uloguj.php", { registruj: true, ime: ime, prezime: prezime, email: email, username: username, sifra: sifra }, function (data) {
+                   
+                    if (data === "ok") {
+                        window.location = "http://localhost/parfemi/index.php";
+                    }
+                })
+            })
+            $("#Login").click(function () {
+                let username = $("#username").val();
+                let sifra = $("#sifra").val();
+                $.post("./server/uloguj.php", { uloguj: true, username: username, sifra: sifra }, function (data) {
+                    console.log(data);
+                    if (data === "ok") {
+                        window.location = "http://localhost/parfemi/index.php";
+                    }
+                })
+            })
+
+        })
+
+    </script>
 </body>
 
 </html>
