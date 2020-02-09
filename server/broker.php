@@ -8,7 +8,7 @@ class Broker{
     private static $instance;
 
     private function __construct(){
-        $this->mysqli=new mysqli("localhost","root","","perfemi");
+        $this->mysqli=new mysqli("localhost","root","","sminka");
 
     }
     public static function getBroker(){

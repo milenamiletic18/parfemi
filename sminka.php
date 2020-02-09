@@ -3,12 +3,12 @@
     if(!$_SESSION["korisnik"]->nazivUloge=="admin"){
         header("location:index.php");
     }
-    $parfem;
-    if(isset($_GET["idParfema"])){
+    $sminka;
+    if(isset($_GET["idSminke"])){
         include "./server/broker.php";
         $broker=Broker::getBroker();
-        $broker->izvrsi("select * from parfem where id=".$_GET["idParfema"]);
-        $parfem= $broker->getRezultat()->fetch_object();
+        $broker->izvrsi("select * from sminka where id=".$_GET["idSminke"]);
+        $sminka= $broker->getRezultat()->fetch_object();
     }
     
 ?>
@@ -28,10 +28,10 @@
 
 <body>
     <?php include "header.php";
-        if(!isset($_GET["idParfema"])){
+        if(!isset($_GET["idSminke"])){
             ?>
     <div>
-        <h1>Dodaj parfem</h1>
+        <h1>Dodaj šminku</h1>
         <form class="mt-5">
             <div class="form-group">
                 <input type="text" class="form-control" id="naziv" placeholder="Naziv">
@@ -49,7 +49,7 @@
                 <input type="file" class="form-control-file" id="slika" />
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" id="dodajParfem">Dodaj Parfem</button>
+                <button class="btn btn-primary" id="dodajSminku">Dodaj šminku</button>
             </div>
         </form>
     </div>
@@ -58,11 +58,11 @@
         }else{
             ?>
     <div>
-        <h1>Izmeni parfem</h1>
+        <h1>Izmeni šminku</h1>
         <form class="mt-5">
             <div class="form-group">
                 <input type="text" class="form-control" id="naziv" placeholder="Naziv"
-                    value="<?php echo $parfem->naziv;?>">
+                    value="<?php echo $sminka->naziv;?>">
             </div>
 
             <div class="form-group">
@@ -72,13 +72,13 @@
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" type="number" id="cena" placeholder="Cena"
-                    value="<?php echo $parfem->cena;?>">
+                    value="<?php echo $sminka->cena;?>">
             </div>
             <div class="form-group">
                 <input type="file" class="form-control-file" id="slika" />
             </div>
             <div class="form-group">
-                <button class="btn btn-primary" onClick="izmeni(<?php echo $_GET["idParfema"];?>)">izmeni Parfem</button>
+                <button class="btn btn-primary" onClick="izmeni(<?php echo $_GET["idSminke"];?>)">Izmeni šminku</button>
             </div>
         </form>
     </div>
@@ -93,7 +93,7 @@
     <script>
         $(document).ready(function () {
             napuniPolove();
-            $("#dodajParfem").click(function (e) {
+            $("#dodajSminku").click(function (e) {
                 e.preventDefault();
                 let naziv = $("#naziv").val();
                 let cena = $("#cena").val();
@@ -108,7 +108,7 @@
                 $.ajax(
                     {
 
-                        url: "./server/izmenaParfema.php",
+                        url: "./server/izmenaSminke.php",
                         type: 'post',
                         data: fd,
                         processData: false,
@@ -139,7 +139,7 @@
                 $.ajax(
                     {
 
-                        url: "./server/izmenaParfema.php",
+                        url: "./server/izmenaSminke.php",
                         type: 'post',
                         data: fd,
                         processData: false,
@@ -167,9 +167,9 @@
                     $("#pol").append(`<option value="${kat.id}" >${kat.naziv}</option>`);
                 }
                 <?php 
-                if (isset($_GET["idParfema"])) {
+                if (isset($_GET["idSminke"])) {
                     ?>
-                        $("#pol").val(<?php echo $parfem->pol; ?>);
+                        $("#pol").val(<?php echo $sminka->pol; ?>);
                     <?php 
                 }
                 ?>

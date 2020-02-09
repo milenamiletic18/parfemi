@@ -7,7 +7,7 @@ if($_SESSION["korisnik"]->nazivUloge!="admin"){
 }else{
    
    
-    $url = 'http://localhost/parfemi/rest/parfem/'.$_POST["id"];
+    $url = 'http://localhost/sminka/rest/sminka/'.$_POST["id"];
     $curl = curl_init($url);
     echo "pocetak";
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

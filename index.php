@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
-  <title>O nama</title>
+  <title>O NAMA</title>
 </head>
 
 <body class="pozadina">
@@ -25,29 +25,25 @@
       <!-- <slider></slider> -->
 
       <div class="odeljak">
-        <img src="./img/logo.png" class='slika'>
-        <h2>O nama</h2>
+        <h2>O NAMA</h2>
         <br>
         <div>
-          <p> Mi smo mala firma za prodaju najkvalitetnijeg sadrzaja. Nasi proizvodi su prepoznatljivi i visoko
-            cenjeni. </p>
+          <p> MJ, online prodavnica šminke, izgradio je sopstveni identitet stavljajući maksimalni akcenat na kvalitet svojih proizvoda - koje su u Italiji stvorile, formulisale i napravile najuglednije kompanije iz sektora lepote- sa izuzetno zanimljivim i raznolikim asortimanom uspeo je da se zadobije široku i veoma specifičnu ciljnu grupu. Široka paleta proizvoda, posvećivanje pažnje detaljima, izgled i ugođaj i visoke performanse proizvoda čine JM online prodavnicu kvalifikovanim savetnikom za lepotu inspirisanu dinamičnom i modernom ženom.. </p>
         </div>
         
       </div>
       <div class="odeljak">
-        <img src="./img/pitanje.png" class='slika'>
-        <h2>Kvalitet proizvoda</h2>
+        <h2>KVALITET PROIZVODA</h2>
         <br>
         <div>
-          <p> Kao sto smo ranije napomenuli, u nasim prodavnicama se prodaje iskljucivo originalna roba visokog kvaliteta. </p>
+          <p> Kao sto smo ranije napomenuli, u našim prodavnicama se prodaje isključivo originalna roba visokog kvaliteta. </p>
         </div>
       </div>
       <div class="odeljak">
-        <img src="./img/brend.png" class='slika'>
-        <h2>Asortima proizvoda</h2>
+        <h2>ASORTIMAN PROIZVODA</h2>
         <br>
         <div>
-          <p> U nasim prodavnicama se nalazi preko 150 razlicitih parfema, medju kojima su najpoznatiji Hugo BOSS, CHANEL, GUCCI i mnogi drugi... </p>
+          <p> U našim prodavnicama se nalazi preko 150 proizvoda za šminkanje najpoznatijih brendova kao što su YSL Beauty, NARS, Urban Decay, Make Up For Ever... </p>
         </div>
       </div>
     <br>

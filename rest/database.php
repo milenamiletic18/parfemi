@@ -3,7 +3,7 @@ class Database {
 	private $hostname = "localhost";
 	private $username = "root";
 	private $password = "";
-	private $dbname = "perfemi";
+	private $dbname = "sminka";
 	private $dblink;
 	private $result = true;
 	private $records;
@@ -32,7 +32,7 @@ class Database {
 		$this->dblink = new mysqli($this->hostname, $this->username, $this->password, $this->dbname);
 		if($this->dblink->connect_errno)
 		{
-			printf("Konekcija neuspesna: %s\n",  $mysqli->connect_error);
+			printf("Konekcija neuspesna: %s\n",  $this->dblink->connect_error);
 			exit();
 		}
 		$this->dblink->set_charset("utf8");

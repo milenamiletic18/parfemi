@@ -5,7 +5,7 @@
         $broker=Broker::getBroker();
         if($_POST["akcija"]=="promeni"){
             if(intval($_POST["kolicina"]) && intval($_POST["kolicina"])>0){
-                $broker->izvrsi("update narudzbina set kolicina=".$_POST["kolicina"]." where kupac=".$_SESSION["korisnik"]->id." and parfem=".$_POST["parfem"]);
+                $broker->izvrsi("update narudzbina set kolicina=".$_POST["kolicina"]." where kupac=".$_SESSION["korisnik"]->id." and sminka=".$_POST["sminka"]);
             }else{
                 echo "kolicina nije dobra";
             }

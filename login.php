@@ -19,7 +19,7 @@
             <div class="col-md-4  forma">
                 <br>
                 <h2>
-                    <center>Dobrodosli!</center>
+                    <center>Dobrodošli!</center>
                 </h2>
                 <br>
                 <input type="text" class="form-control" placeholder="username" id="username">
@@ -36,7 +36,7 @@
                 <br>
                 <button class="form-control dugme" id="Login">Login</button>
 
-                <button class="form-control dugme" id="regForma">Nemas nalog?</button>
+                <button class="form-control dugme" id="regForma">Nemaš nalog?</button>
                 <button class="form-control dugme" id="register" hidden="true">Register</button>
             </div>
             <div class="col-md-4"></div>
@@ -64,7 +64,7 @@
                 $.post("./server/uloguj.php", { registruj: true, ime: ime, prezime: prezime, email: email, username: username, sifra: sifra }, function (data) {
                    
                     if (data === "ok") {
-                        window.location = "http://localhost/parfemi/index.php";
+                        window.location = "http://localhost/sminka/index.php";
                     }
                 })
             })
@@ -74,7 +74,7 @@
                 $.post("./server/uloguj.php", { uloguj: true, username: username, sifra: sifra }, function (data) {
                     console.log(data);
                     if (data === "ok") {
-                        window.location = "http://localhost/parfemi/index.php";
+                        window.location = "http://localhost/sminka/index.php";
                     }
                 })
             })

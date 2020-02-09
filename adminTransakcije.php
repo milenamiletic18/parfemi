@@ -22,7 +22,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>adminTransakcije</title>
 </head>
 
 <body class="pozadina">
@@ -30,10 +30,7 @@
 
     <div class="container polje">
         <br><br>
-        <div class="odeljak">
-            <img src="./img/pitanje.png" height="200px" width="200px">
-        </div>
-
+       
 
         <nav class="navbar navbar-expand-lg navbar-light bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -44,11 +41,11 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <button id="prikaziTransakcije">
-                            Protekle transakcije
+                        PROTEKLE TRANSAKCIJE
                         </button>
                     </li>
                     <button id="prikaziKorisnike">
-                        Spisak korisnika
+                        SPISAK KORISNIKA
                     </button>
                 </ul>
             </div>
@@ -65,7 +62,7 @@
                 <th>ID</th>
                 <th>Ime</th>
                 <th>Prezime</th>
-                <th>Email</th>
+                <th>E-mail</th>
                 <th>Username</th>
                 </thead>
                 <tbody>

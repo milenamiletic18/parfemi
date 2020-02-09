@@ -9,7 +9,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>KORPA</title>
 </head>
 
 <body class="pozadina">
@@ -21,7 +21,7 @@
             <br>
             <div class="col-2"></div>
             <div class="col-8 polje">
-                <h3>Proizvodi u vasoj korpi:</h3>
+                <h3>Proizvodi u vašoj korpi:</h3>
             </div>
             <div class="col-2"></div>
             <br>
@@ -41,11 +41,11 @@
             </div>
             <div class="col-4">
                 <div class="odeljak">
-                    <h4>Racun:</h4>
+                    <h4>Račun:</h4>
                     <hr>
                     <p id="ukupno"></p>
 
-                    <button id="poruci" class="form-control dugme">Poruci</button>
+                    <button id="poruci" class="form-control dugme">Poruči</button>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
                     `);
                     $(`#${i}-obrisi`).click(function () {
 
-                        $.post("./server/promeniNarudzbinu.php", { akcija: "obrisi", parfem: narudzbina.parfem }, function (data) {
+                        $.post("./server/promeniNarudzbinu.php", { akcija: "obrisi", sminka: narudzbina.sminka }, function (data) {
                             if (data !== "uspeh")
                                 alert(data);
                             izracunajUkupno();
@@ -107,7 +107,7 @@
                     $(`#${i}-narudzbina`).change(function (e) {
 
                         let kol = $(`#${i}-narudzbina`).val();
-                        $.post("./server/promeniNarudzbinu.php", { akcija: "promeni", parfem: narudzbina.parfem, kolicina: kol }, function (data) {
+                        $.post("./server/promeniNarudzbinu.php", { akcija: "promeni", sminka: narudzbina.sminka, kolicina: kol }, function (data) {
                             if (data !== "uspeh")
                                 alert(data);
                             izracunajUkupno();
